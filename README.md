@@ -1,10 +1,9 @@
-# Tietokantasovelluksen esittelysivu
+# Aineopintojen harjoitustyö: Tietokantasovellus
+# ChattiPalvelu
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](https://www.cs.helsinki.fi)
-* [Linkki dokumentaatiooni](https://www.github.com)
+* [Linkki sovellukseeni](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu)
+* [Linkki dokumentaatiooni](https://github.com/Jusaa/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
-## Työn aihe
 
-Laita tähän aihekuvaus tai [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Pokemon-kanta.html) 
