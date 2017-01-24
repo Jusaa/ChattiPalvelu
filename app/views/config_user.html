@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muokkaa käyttäjän tietoja</h1>
+
+  <form>
+    <div class="form-group">
+      <label>Nimi</label>
+      <input type="text" class="form-control" value="Jussi">
+    </div>
+    <div class="form-group">
+      <label>Muut tiedot</label>
+      <input type="text" class="form-control" value="Lisää tietoja myöhemmin">
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+  </form>
+{% endblock %}
