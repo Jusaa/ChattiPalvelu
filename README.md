@@ -14,7 +14,7 @@ Linkkejä sovelluksen eri sivuille:
 * [Huoneen muokkaussivu](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/huone/1/muokkaa)
 * [Käyttäjän profiili](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/user)
 * [Käyttäjän tietojen muokkaussivu](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/user/1/muokkaa)
-
 * [Login](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/login)
+
 * [Register](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/register)
 
