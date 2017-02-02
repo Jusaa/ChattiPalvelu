@@ -22,12 +22,16 @@
     HelloWorldController::register();
   });
   
+  $routes->post('/register', function() {
+      HelloWorldController::registerPost();
+  });
+  
   $routes->get('/huoneet', function() {
     HelloWorldController::index();
   });
   
-  $routes->get('/huone/1', function() {
-    HelloWorldController::huone();
+  $routes->get('/huone/:id', function($id) {
+    HelloWorldController::huone($id);
   });
   
   $routes->get('/listall', function() {
@@ -42,8 +46,12 @@
     HelloWorldController::user();
   });
   
-  $routes->get('/user/1/muokkaa', function() {
-    HelloWorldController::kayttajaMuokkaa();
+  $routes->post('/user/:id/muokkaa', function($id) {
+    HelloWorldController::user_update($id);
+  });
+  
+  $routes->get('/user/:id/muokkaa', function($id) {
+    HelloWorldController::kayttajaMuokkaa($id);
   });
   
   

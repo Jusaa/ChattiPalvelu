@@ -13,20 +13,36 @@ class HelloWorldController extends BaseController {
     public static function register() {
         View::make('register.html');
     }
+    
+    public static function registerPost() {
+        $params = $_POST;
+        $kayttaja = new Kayttaja(array(
+            'nimi' => $params['nimi'],
+            'password' => $params['password'],
+            'email' => $params['email'],
+            'taso' => 1
+        ));
 
-    public static function huone() {
-        View::make('huone.html');
+        $kayttaja->save();
+        
+        Redirect::to('/login');
+    }
+
+    public static function huone($id) {
+        $huone = Huone::find($id);
+        View::make('huone.html', array('huone' => $huone));
     }
 
     public static function user() {
         View::make('profile.html');
     }
 
-// ADMIN OSOITTEET ----------------------------------------------
-
     public static function huoneet() {
-        View::make('huoneet.html');
+        $huoneet = Huone::all();
+        View::make('huoneet.html', array('huoneet' => $huoneet));
     }
+
+// ADMIN OSOITTEET ----------------------------------------------
 
     public static function listall() {
         View::make('list_all.html');
@@ -36,14 +52,34 @@ class HelloWorldController extends BaseController {
         View::make('config_room.html');
     }
 
-    public static function kayttajaMuokkaa() {
-        View::make('config_user.html');
+    public static function kayttajaMuokkaa($id) {
+        $kayttaja = Kayttaja::find($id);
+        View::make('config_user.html', array('kayttaja' => $kayttaja));
+    }
+
+    public static function user_update($id) {
+        $params = $_POST;
+        $kayttaja = Kayttaja::find($id);
+        $attributes = array(
+            'id' => $id,
+            'nimi' => $params['nimi'],
+            'email' => $params['email'],
+            'taso' => $params['taso']
+        );
+
+        $kayttaja->update($attributes);
+        
+        Redirect::to('/');
     }
 
 // ESIMERKKI OSOITTEET --------------------------------------------
 
     public static function sandbox() {
-        View::make('x_helloworld.html');
+        $jussi = Kayttaja::find(1);
+        $kayttajat = Kayttaja::all();
+        // Kint-luokan dump-metodi tulostaa muuttujan arvon
+        Kint::dump($kayttajat);
+        Kint::dump($jussi);
     }
 
     public static function gamelist() {

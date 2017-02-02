@@ -1,18 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Muokkaa käyttäjän tietoja</h1>
+<h1>Muokkaa käyttäjän {{kayttaja.nimi}} tietoja</h1>
 
-  <form>
+<form method="post" action="{{base_path}}/user/{{kayttaja.id}}/muokkaa">
     <div class="form-group">
-      <label>Nimi</label>
-      <input type="text" class="form-control" value="Jussi">
+        <label>Nimi</label>
+        <input type="text" name="nimi" value="{{kayttaja.nimi}}">
     </div>
     <div class="form-group">
-      <label>Muut tiedot</label>
-      <input type="text" class="form-control" value="Lisää tietoja myöhemmin">
+        <label>Sähköposti</label>
+        <input type="text" name="email" value="{{kayttaja.email}}">
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Tallenna</button>
+        <label>Taso</label>
+        <input type="text" name="taso" value="{{kayttaja.taso}}">
     </div>
-  </form>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+</form>
 {% endblock %}

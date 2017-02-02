@@ -2,18 +2,18 @@
 {% block content %}
   <h1>Rekisteröidy</h1>
 
-  <!-- Kaikki lomakkeen elementit form-tagin sisään -->
-  <form>
-    <!-- Tekstikenttä käyttäjätunnukselle -->
+  <form method="post" action="{{base_path}}/register">
     <div class="form-group">
       <label>Käyttäjätunnus</label>
-      <input type="text" class="form-control">
+      <input type="text" name="nimi" class="form-control">
     </div>
-
-    <!-- Salasanakenttä salasanalle -->
     <div class="form-group">
       <label>Salasana</label>
-      <input type="password" class="form-control">
+      <input type="password" name="password" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Sähköposti</label>
+      <input type="text" name="email" class="form-control">
     </div>
 
     <button type="submit" class="btn btn-primary">Rekisteröidy</button>
