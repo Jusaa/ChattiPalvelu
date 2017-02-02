@@ -38,12 +38,16 @@
     HelloWorldController::listall();
   });
 
-  $routes->get('/huone/1/muokkaa', function() {
-    HelloWorldController::huoneMuokkaa();
+  $routes->get('/huone/:id/muokkaa', function($id) {
+    HelloWorldController::huoneMuokkaa($id);
   });
   
-  $routes->get('/user', function() {
-    HelloWorldController::user();
+  $routes->post('/huone/:id/muokkaa', function($id) {
+    HelloWorldController::room_update($id);
+  });
+  
+  $routes->get('/user/:id', function($id) {
+    HelloWorldController::user($id);
   });
   
   $routes->post('/user/:id/muokkaa', function($id) {

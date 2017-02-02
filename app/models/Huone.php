@@ -53,6 +53,11 @@ class Huone extends BaseModel{
 
     return null;
   }
+  
+  public static function save($huone) {
+        $query = DB::connection()->prepare('INSERT INTO Huone (nimi, kuvaus) VALUES (:nimi, :kuvaus)');
+        $query->execute(array('nimi' => $huone->nimi, 'password' => $huone->kuvaus));
+    }
     
 }
 

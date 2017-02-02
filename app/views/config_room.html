@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Muokkaa huoneen tietoja</h1>
+<h1>Muokkaa huoneen {{huone.nimi}} tietoja</h1>
 
-  <form>
+<form method="post" action="{{base_path}}/huone/{{huone.id}}/muokkaa">
     <div class="form-group">
-      <label>Nimi</label>
-      <input type="text" class="form-control" value="Pelit">
+        <label>Nimi</label>
+        <input type="text" name="nimi" value="{{huone.nimi}}">
     </div>
     <div class="form-group">
-      <label>Muut tiedot</label>
-      <input type="text" class="form-control" value="Lisää tietoja myöhemmin">
+        <label>Kuvaus</label>
+        <input type="text" name="kuvaus" value="{{huone.kuvaus}}">
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Tallenna</button>
+        <button type="submit" class="btn btn-primary">Tallenna</button>
     </div>
-  </form>
+</form>
 {% endblock %}

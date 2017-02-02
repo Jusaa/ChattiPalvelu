@@ -19,11 +19,10 @@ class HelloWorldController extends BaseController {
         $kayttaja = new Kayttaja(array(
             'nimi' => $params['nimi'],
             'password' => $params['password'],
-            'email' => $params['email'],
-            'taso' => 1
+            'email' => $params['email']
         ));
-
-        $kayttaja->save();
+        
+        $kayttaja->save($kayttaja);
         
         Redirect::to('/login');
     }
@@ -33,8 +32,9 @@ class HelloWorldController extends BaseController {
         View::make('huone.html', array('huone' => $huone));
     }
 
-    public static function user() {
-        View::make('profile.html');
+    public static function user($id) {
+        $kayttaja = Kayttaja::find($id);
+        View::make('profile.html', array('kayttaja' => $kayttaja));
     }
 
     public static function huoneet() {
@@ -45,11 +45,18 @@ class HelloWorldController extends BaseController {
 // ADMIN OSOITTEET ----------------------------------------------
 
     public static function listall() {
-        View::make('list_all.html');
+        $huoneet = Huone::all();
+        $kayttajat = Kayttaja::all();
+        View::make('list_all.html', array('huoneet' => $huoneet, 'kayttajat' => $kayttajat));
     }
 
-    public static function huoneMuokkaa() {
-        View::make('config_room.html');
+    public static function huoneMuokkaa($id) {
+        $huone = Huone::find($id);
+        View::make('config_room.html', array('huone' => $huone));
+    }
+    
+    public static function room_update($id){
+        
     }
 
     public static function kayttajaMuokkaa($id) {
@@ -67,7 +74,7 @@ class HelloWorldController extends BaseController {
             'taso' => $params['taso']
         );
 
-        $kayttaja->update($attributes);
+        $kayttaja->save($attributes);
         
         Redirect::to('/');
     }

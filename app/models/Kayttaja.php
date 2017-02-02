@@ -53,9 +53,9 @@ class Kayttaja extends BaseModel {
         return null;
     }
 
-    public static function save() {
-        $query = DB::connection()->prepare('INSERT INTO Kayttaja (nimi, password, email, taso) VALUES (:nimi, :password, :email, 1)');
-        $query->execute(array('nimi' => $this->nimi, 'password' => $this->password, 'email' => $this->email));
+    public static function save($kayttaja) {
+        $query = DB::connection()->prepare('INSERT INTO Kayttaja (nimi, password, email) VALUES (:nimi, :password, :email)');
+        $query->execute(array('nimi' => $kayttaja->nimi, 'password' => $kayttaja->password, 'email' => $kayttaja->email));
     }
 
 //    public static function update($attributes) {

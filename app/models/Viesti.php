@@ -57,6 +57,11 @@ class Viesti extends BaseModel{
 
     return null;
   }
+  
+  public static function save($viesti) {
+        $query = DB::connection()->prepare('INSERT INTO Viesti (kayttaja_id, huone_id, sisalto) VALUES (:kayttaja_id, :huone_id, :sisalto)');
+        $query->execute(array('kayttaja_id' => $viesti->kayttaja_id, 'huone_id' => $viesti->huone_id, 'sisalto' => $viesti->sisalto));
+    }
     
 }
 
