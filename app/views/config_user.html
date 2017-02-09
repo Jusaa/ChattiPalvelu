@@ -16,19 +16,19 @@
 <form method="post" action="{{base_path}}/user/{{kayttaja.id}}/muokkaa">
     <div class="form-group">
         <label>Nimi</label>
-        <input type="text" name="nimi" value="{{kayttaja.nimi}}">
+        <input type="text" name="nimi" class="form-control" value="{{kayttaja.nimi}}">
     </div>
     <div class="form-group">
         <label>Sähköposti</label>
-        <input type="text" name="email" value="{{kayttaja.email}}">
+        <input type="text" name="email" class="form-control" value="{{kayttaja.email}}">
     </div>    
     <div class="form-group">
         <label>Salasana</label>
-        <input type="password" name="password" value="{{kayttaja.password}}">
+        <input type="password" name="password" class="form-control" value="{{kayttaja.password}}">
     </div>
     <div class="form-group">
         <label>Taso</label>
-        <input type="text" name="taso" value="{{kayttaja.taso}}">
+        <input type="text" name="taso" class="form-control" value="{{kayttaja.taso}}">
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Tallenna</button>

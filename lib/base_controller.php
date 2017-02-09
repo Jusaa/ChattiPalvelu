@@ -5,7 +5,7 @@ class BaseController {
     public static function get_user_logged_in() {
         if (isset($_SESSION['kayttaja'])) {
             $id = $_SESSION['kayttaja'];
-            $kayttaja = User::find($id);
+            $kayttaja = Kayttaja::find($id);
             return $kayttaja;
         }
         return null;

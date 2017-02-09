@@ -40,6 +40,10 @@
     KayttajaController::loginPost();
   });
   
+  $routes->get('/logout', function() {
+  KayttajaController::logout();
+  });
+  
   $routes->get('/register', function() {
     KayttajaController::register();
   });

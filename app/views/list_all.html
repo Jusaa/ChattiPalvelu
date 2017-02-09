@@ -1,3 +1,4 @@
+{% import "macros/napit.html" as napit %}
 {% extends "base.html" %}
 {% block content %}
 <h1>Kaikki huoneet:</h1>
@@ -8,6 +9,7 @@
             <th>Nimi</th>
             <th>Kuvaus</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
 
@@ -17,6 +19,7 @@
           <td><a href="{{base_path}}/huone/{{huone.id}}">{{huone.nimi}}</td>
           <td>{{huone.kuvaus}}</td>
           <td><a class="btn btn-default btn-sm" href="{{base_path}}/huone/{{huone.id}}/muokkaa">Muokkaa</a></td>
+          <td><a class="btn btn-danger btn-sm" href="{{base_path}}/huone/{{huone.id}}/poista">Poista (Ei toimi vielä)</a></td>
         </tr>
       {% endfor %}
     </tbody>
@@ -31,6 +34,7 @@
             <th>Email</th>
             <th>Taso</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
 
@@ -41,6 +45,7 @@
           <td>{{kayttaja.email}}</td>
           <td>{{kayttaja.taso}}</td>
           <td><a class="btn btn-default btn-sm" href="{{base_path}}/user/{{kayttaja.id}}/muokkaa">Muokkaa</a></td>
+          <td>{{napit.poista_button("#{base_path}/user/#{kayttaja.id}/poista")}}</td>
         </tr>
       {% endfor %}
     </tbody>

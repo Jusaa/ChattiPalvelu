@@ -35,7 +35,7 @@
                     <!-- Sovelluksen nimi -->
                     <a class="navbar-brand" href="{{base_path}}">ChattiPalvelu</a>
                 </div>
-
+                
                 <div class="collapse navbar-collapse" id="navigation">
                     <ul class="nav navbar-nav">
                         <!-- Navigaation linkit -->
@@ -43,12 +43,19 @@
                         <li><a href="/ChattiPalvelu/user/{{user_logged_in.id}}">Profiili</a></li>
                         {% endif %}
                     </ul>
+                    {% if not user_logged_in %}
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/ChattiPalvelu/login">Kirjaudu sisään</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/ChattiPalvelu/register">Rekisteröidy</a></li>
                     </ul>
+                    {% endif %}
+                    {% if user_logged_in %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/ChattiPalvelu/logout">Kirjaudu ulos</a></li>
+                    </ul>
+                    {% endif %}
                 </div>
             </div>
         </nav>

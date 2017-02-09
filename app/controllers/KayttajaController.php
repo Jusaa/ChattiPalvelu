@@ -16,8 +16,13 @@ class KayttajaController extends BaseController {
         }else{
             $_SESSION['kayttaja'] = $kayttaja->id;
 
-        Redirect::to('/', array('message' => 'Hei ' . $user->name . '! Kirjautuminen onnistui'));
+        Redirect::to('/', array('message' => 'Hei ' . $kayttaja->nimi . '! Kirjautuminen onnistui'));
         }
+    }
+    
+    public static function logout() {
+        $_SESSION['kayttaja'] = null;
+        Redirect::to('/login', array('message' => 'Uloskirjautuminen onnistui'));
     }
     
     public static function register() {

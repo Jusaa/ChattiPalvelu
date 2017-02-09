@@ -53,6 +53,26 @@ class Kayttaja extends BaseModel {
 
         return null;
     }
+    
+    public static function findNimella($nimi) {
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE nimi = :nimi LIMIT 1');
+        $query->execute(array('nimi' => $nimi));
+        $row = $query->fetch();
+
+        if ($row) {
+            $kayttaja = new Kayttaja(array(
+                'id' => $row['id'],
+                'nimi' => $row['nimi'],
+                'password' => $row['password'],
+                'email' => $row['email'],
+                'taso' => $row['taso']
+            ));
+
+            return $kayttaja;
+        }
+
+        return null;
+    }
 
     public static function save($kayttaja) {
         $query = DB::connection()->prepare('INSERT INTO Kayttaja (nimi, password, email) VALUES (:nimi, :password, :email)');
@@ -74,7 +94,7 @@ class Kayttaja extends BaseModel {
         $query->execute(array('nimi' => $nimi, 'password' => $password));
         $row = $query->fetch();
         if ($row) {
-            return $this;
+            return self::findNimella($nimi);
         } else {
             return null;
         }
