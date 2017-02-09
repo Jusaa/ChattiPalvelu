@@ -2,18 +2,28 @@
 {% block content %}
   <h1>Rekisteröidy</h1>
 
+  {% if errors %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for error in errors %}
+          <li>{{error}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  
   <form method="post" action="{{base_path}}/register">
     <div class="form-group">
       <label>Käyttäjätunnus</label>
-      <input type="text" name="nimi" class="form-control">
+      <input type="text" name="nimi" class="form-control" value="{{attributes.nimi}}">
     </div>
     <div class="form-group">
       <label>Salasana</label>
-      <input type="password" name="password" class="form-control">
+      <input type="password" name="password" class="form-control" value="{{attributes.password}}">
     </div>
     <div class="form-group">
       <label>Sähköposti</label>
-      <input type="text" name="email" class="form-control">
+      <input type="text" name="email" class="form-control" value="{{attributes.email}}">
     </div>
 
     <button type="submit" class="btn btn-primary">Rekisteröidy</button>
