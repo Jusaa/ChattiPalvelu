@@ -12,9 +12,9 @@ Linkkejä sovelluksen eri sivuille:
 * [Listaus](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/listall)
 * [Huoneen sivu](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/huone/1)
 * [Huoneen muokkaussivu](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/huone/1/muokkaa)
-* [Käyttäjän profiili](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/user)
+* [Esimerkkikäyttäjän profiili](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/user/1)
 * [Käyttäjän tietojen muokkaussivu](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/user/1/muokkaa)
 * [Login](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/login)
-
 * [Register](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/register)
 
+Testikäyttäjänä voi käyttää [testi, testi] käyttäjää, mutta rekisteröityminen toimii, joten oman käyttäjän käyttäminen mahdollista
