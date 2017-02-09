@@ -2,6 +2,23 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="TsohaWindowsilla"/>
+        <group name="TsohaWindowsilla">
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/config/routes.php</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/huoneet.html</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/home.html</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/huone.html</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/base.html</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/login.html</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/controllers/HuoneController.php</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/profile.html</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/controllers/MainController.php</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/macros/napit.html</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/list_all.html</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/models/Kayttaja.php</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/config_user.html</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/controllers/KayttajaController.php</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/register.html</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/lib/base_controller.php</file>
+        </group>
     </open-files>
 </project-private>
