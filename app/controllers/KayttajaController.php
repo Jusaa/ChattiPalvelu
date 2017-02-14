@@ -47,16 +47,19 @@ class KayttajaController extends BaseController {
     }
 
     public static function user($id) {
+        self::check_logged_in();
         $kayttaja = Kayttaja::find($id);
         View::make('profile.html', array('kayttaja' => $kayttaja));
     }
 
     public static function kayttajaMuokkaa($id) {
+        self::check_logged_in();
         $kayttaja = Kayttaja::find($id);
         View::make('config_user.html', array('kayttaja' => $kayttaja));
     }
 
     public static function user_update($id) {
+        self::check_logged_in();
         $params = $_POST;
         $attributes = array(
             'id' => $id,
@@ -70,7 +73,7 @@ class KayttajaController extends BaseController {
         $errors = $kayttaja->errors();
 
         if (count($errors) > 0) {
-            View::make('config_user.html', array('errors' => $errors));
+            View::make('config_user.html', array('errors' => $errors, 'kayttaja' => $kayttaja));
         } else {
             // Kutsutaan alustetun olion update-metodia, joka päivittää pelin tiedot tietokannassa
             $kayttaja->update($kayttaja);
@@ -79,6 +82,7 @@ class KayttajaController extends BaseController {
     }
 
     public static function user_delete($id) {
+        self::check_logged_in();
         Kayttaja::delete($id);
         Redirect::to('/', array('message' => 'Käyttäjä on poistettu onnistuneesti!'));
     }

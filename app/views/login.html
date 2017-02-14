@@ -10,6 +10,14 @@
 </div>
 {% endif %}
 
+{% if message2 %}
+<div class="alert alert-success">
+    <ul>
+        <li>{{message2}} <a class="btn btn-default btn-sm" href="{{base_path}}/register">Rekisteröidy</a></li>
+    </ul>
+</div>
+{% endif %}
+
 <form method="post" action="{{base_path}}/login">
     <div class="form-group">
         <label>Käyttäjätunnus</label>
@@ -22,5 +30,6 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
+    
 </form>
 {% endblock %}

@@ -14,10 +14,12 @@
 class MainController extends BaseController {
     
     public static function index() {
+        self::check_logged_in();
         View::make('home.html');
     }
     
     public static function listall() {
+        self::check_logged_in();
         $huoneet = Huone::all();
         $kayttajat = Kayttaja::all();
         View::make('list_all.html', array('huoneet' => $huoneet, 'kayttajat' => $kayttajat));

@@ -19,11 +19,13 @@
           <td><a href="{{base_path}}/huone/{{huone.id}}">{{huone.nimi}}</td>
           <td>{{huone.kuvaus}}</td>
           <td><a class="btn btn-default btn-sm" href="{{base_path}}/huone/{{huone.id}}/muokkaa">Muokkaa</a></td>
-          <td><a class="btn btn-danger btn-sm" href="{{base_path}}/huone/{{huone.id}}/poista">Poista (Ei toimi vielä)</a></td>
+          <td>{{napit.poista_button("#{base_path}/huone/#{huone.id}/poista", 'POISTA HUONE')}}</td>
         </tr>
       {% endfor %}
     </tbody>
 </table>
+
+<a href="{{base_path}}/huone/lisaa">Lisää uusi huone</a>
 
 <h1>Kaikki käyttäjät:</h1>
 

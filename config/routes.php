@@ -17,6 +17,14 @@
     HuoneController::huoneet();
   });
   
+  $routes->get('/huone/lisaa', function() {
+      HuoneController::lisaa();
+  });
+  
+  $routes->post('/huone/lisaa', function() {
+    HuoneController::lisaaPost();
+  });
+  
   $routes->get('/huone/:id', function($id) {
     HuoneController::huone($id);
   });
@@ -29,6 +37,9 @@
     HuoneController::room_update($id);
   });
   
+  $routes->post('/huone/:id/poista', function($id) {
+    HuoneController::room_delete($id);
+  }); 
   
 //KAYTTAJACONTROLLER -----------------------------------------------------------
   
