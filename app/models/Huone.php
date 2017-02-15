@@ -76,6 +76,18 @@ class Huone extends BaseModel {
         $query = DB::connection()->prepare('DELETE FROM Huone WHERE id=:id');
         $query->execute(array('id' => $id));
     }
+    
+    public static function kayttajat($id){
+        $query = DB::connection()->prepare('SELECT * FROM HuoneKayttaja WHERE huone_id=:hid');
+        $query->execute(array('hid' => $id));
+        $rows = $query->fetchAll();
+        $kayttajat = array();
+
+        foreach ($rows as $row) {
+            array_push($kayttajat, Kayttaja::find($row['id']));
+        }
+        return $kayttajat;
+    }
 
     public function validate_nimi() {
         $errors = array();

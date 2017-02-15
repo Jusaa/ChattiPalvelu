@@ -1,15 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <div class="page-header">
     <h1>{{huone.nimi}}</h1>
+
+    {% if message %}
+    <div class="alert alert-success">
+        <ul>
+            <li>{{message}}</li>
+        </ul>
+    </div>
+    {% endif %}
+
+
     <div class="text-right">
-        <button class="btn btn-success">Liity huoneeseen</button>
-        <span> / </span>
-        <button class="btn btn-danger">Poistu huoneesta</button>
+        {% if liittynyt %}
+        <a class="btn btn-danger btn-sm" href="{{base_path}}/huone/poistu/{{huone.id}}">Poistu huoneesta</a>
+        {% else %}
+        <a class="btn btn-success btn-sm" href="{{base_path}}/huone/liity/{{huone.id}}">Liity huoneeseen</a>
+        {% endif %}
     </div>    
+
 </div>
 <p>
-    <span>Chatti-ikkuna</span><span class="pull-right">Huoneen käyttäjälista</span>  
+    <span>Huoneen käyttäjälista</span>  
+    {% for kayttaja in kayttajat %}
+        <a class="btn" href="{{base_path}}/user/{{kayttaja.id}}">{{kayttaja.nimi}}</a>
+    {% endfor %}
 </p>
 {% endblock %}

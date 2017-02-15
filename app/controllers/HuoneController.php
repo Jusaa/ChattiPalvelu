@@ -5,7 +5,12 @@ class HuoneController extends BaseController{
     public static function huone($id) {
         self::check_logged_in();
         $huone = Huone::find($id);
-        View::make('huone.html', array('huone' => $huone));
+        $kayttaja = self::get_user_logged_in();
+        $huonekayttajat = Huone::kayttajat($id);
+        if($kayttaja->onko_huoneessa($huone, $kayttaja)){
+            View::make('huone.html', array('huone' => $huone, 'liittynyt' => $kayttaja, 'kayttajat' => $huonekayttajat));
+        }
+        View::make('huone.html', array('huone' => $huone, 'kayttajat' => $huonekayttajat));
     }    
 
     public static function huoneet() {
@@ -38,7 +43,7 @@ class HuoneController extends BaseController{
     public static function huoneMuokkaa($id) {
         self::check_logged_in();
         $huone = Huone::find($id);
-        View::make('config_room.html', array('huone' => $huone));
+        View::make('muokkaa_huone.html', array('huone' => $huone));
     }
     
     public static function room_update($id){
@@ -54,7 +59,7 @@ class HuoneController extends BaseController{
         $errors = $huone->errors();
 
         if (count($errors) > 0) {
-            View::make('config_room.html', array('errors' => $errors, 'huone' => $huone));
+            View::make('muokkaa_huone.html', array('errors' => $errors, 'huone' => $huone));
         } else {
             $huone->update($huone);
             Redirect::to('/', array('message' => 'Tietoja on muokattu onnistuneesti!'));
@@ -65,5 +70,19 @@ class HuoneController extends BaseController{
         self::check_logged_in();
         Huone::delete($id);
         Redirect::to('/', array('message' => 'Huone on poistettu onnistuneesti!'));
+    }
+    
+    public static function liity($id){
+        $kayttaja = self::get_user_logged_in();
+        $huone = Huone::find($id);
+        $kayttaja->liity_huoneeseen($huone, $kayttaja);
+        Redirect::to('/huone/' . $huone->id, array('huone' => $huone, 'message' => 'Huoneeseen liitytty!'));
+    }
+    
+    public static function poistu($id){
+        $kayttaja = self::get_user_logged_in();
+        $huone = Huone::find($id);
+        $kayttaja->poistu_huoneesta($huone, $kayttaja);
+        Redirect::to('/huone/' . $huone->id, array('huone' => $huone, 'message' => 'Huoneesta poistuttu!'));
     }
 }

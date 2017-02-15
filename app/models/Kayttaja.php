@@ -95,9 +95,29 @@ class Kayttaja extends BaseModel {
         $row = $query->fetch();
         if ($row) {
             return self::findNimella($nimi);
-        } else {
-            return null;
         }
+        return null;
+        
+    }
+    
+    public static function onko_huoneessa($huone, $kayttaja){
+        $query = DB::connection()->prepare('SELECT * FROM HuoneKayttaja WHERE kayttaja_id=:kid AND huone_id=:hid LIMIT 1');
+        $query->execute(array('kid' => $kayttaja->id, 'hid' => $huone->id));
+        $row = $query->fetch();
+        if($row){
+            return true;
+        }
+        return false;
+    }
+    
+    public static function liity_huoneeseen($huone, $kayttaja) {
+        $query = DB::connection()->prepare('INSERT INTO HuoneKayttaja (kayttaja_id, huone_id) VALUES (:kid, :hid)');
+        $query->execute(array('kid' => $kayttaja->id, 'hid' => $huone->id));
+    }
+    
+    public static function poistu_huoneesta($huone, $kayttaja) {
+        $query = DB::connection()->prepare('DELETE FROM HuoneKayttaja WHERE huone_id=:hid AND kayttaja_id=:kid');
+        $query->execute(array('kid' => $kayttaja->id, 'hid' => $huone->id));
     }
 
     public function validate_nimi() {
@@ -132,10 +152,4 @@ class Kayttaja extends BaseModel {
 
         return $errors;
     }
-
-//    public static function update($attributes) {
-//        $query = DB::connection()->prepare('UPDATE Kayttaja SET nimi=:nimi, email=:email, taso=:taso WHERE id=:id');
-//        $query->execute(array('nimi' => $attributes->nimi, 'email' => $attributes->email, 'taso' => $attributes->taso, 'id' => $attributes->id));
-//        $query->execute();
-//    }
 }

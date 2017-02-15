@@ -79,6 +79,14 @@
     KayttajaController::user_delete($id);
   });
   
+  $routes->get('/huone/liity/:id', function($id) {
+      HuoneController::liity($id); 
+  });
+  
+  $routes->get('/huone/poistu/:id', function($id) {
+      HuoneController::poistu($id); 
+  });
+  
 //ESIMERKIT --------------------------------------------------------------------
 
   $routes->get('/hiekkalaatikko', function() {
