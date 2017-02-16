@@ -17,6 +17,7 @@ class Viesti extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validateSisalto');
     }
 
     public static function all() {
@@ -74,7 +75,7 @@ class Viesti extends BaseModel {
         $query->execute(array('id' => $id));
     }
 
-    public function validate_sisalto() {
+    public function validateSisalto() {
         $errors = array();
         if ($this->sisalto == '' || $this->sisalto == null) {
             $errors[] = 'Viesti ei saa olla tyhjä!';

@@ -17,7 +17,7 @@ class Huone extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_nimi');
+        $this->validators = array('validateNimi');
     }
 
     public static function all() {
@@ -89,7 +89,7 @@ class Huone extends BaseModel {
         return $kayttajat;
     }
     
-    public function validate_nimi() {
+    public function validateNimi() {
         $errors = array();
         if ($this->nimi == '' || $this->nimi == null) {
             $errors[] = 'Nimi ei saa olla tyhjä! Minimissään neljä merkkiä!';

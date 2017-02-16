@@ -34,11 +34,11 @@
   });
   
   $routes->post('/huone/:id/muokkaa', function($id) {
-    HuoneController::room_update($id);
+    HuoneController::paivita($id);
   });
   
   $routes->post('/huone/:id/poista', function($id) {
-    HuoneController::room_delete($id);
+    HuoneController::poista($id);
   }); 
   
 //KAYTTAJACONTROLLER -----------------------------------------------------------

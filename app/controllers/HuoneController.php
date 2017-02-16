@@ -1,17 +1,17 @@
 <?php
 
-class HuoneController extends BaseController{
-    
+class HuoneController extends BaseController {
+
     public static function huone($id) {
         self::check_logged_in();
         $huone = Huone::find($id);
         $kayttaja = self::get_user_logged_in();
         $huonekayttajat = Huone::kayttajat($id);
-        if($kayttaja->onko_huoneessa($huone, $kayttaja)){
+        if ($kayttaja->onkoHuoneessa($huone, $kayttaja)) {
             View::make('huone.html', array('huone' => $huone, 'liittynyt' => $kayttaja, 'kayttajat' => $huonekayttajat));
         }
         View::make('huone.html', array('huone' => $huone, 'kayttajat' => $huonekayttajat));
-    }    
+    }
 
     public static function huoneet() {
         self::check_logged_in();
@@ -19,7 +19,7 @@ class HuoneController extends BaseController{
         $user_logged_in = self::get_user_logged_in();
         View::make('huoneet.html', array('huoneet' => $huoneet, 'user_logged_in' => $user_logged_in));
     }
-    
+
     public static function lisaa() {
         self::check_logged_in();
         View::make('lisaa_huone.html');
@@ -41,14 +41,14 @@ class HuoneController extends BaseController{
 
         View::make('lisaa_huone.html', array('errors' => $errors, 'attributes' => $attributes));
     }
-    
+
     public static function huoneMuokkaa($id) {
         self::check_logged_in();
         $huone = Huone::find($id);
         View::make('muokkaa_huone.html', array('huone' => $huone));
     }
-    
-    public static function room_update($id){
+
+    public static function paivita($id) {
         self::check_logged_in();
         $params = $_POST;
         $attributes = array(
@@ -67,26 +67,27 @@ class HuoneController extends BaseController{
             Redirect::to('/', array('message' => 'Tietoja on muokattu onnistuneesti!'));
         }
     }
-    
-    public static function room_delete($id){
+
+    public static function poista($id) {
         self::check_logged_in();
         Huone::delete($id);
         Redirect::to('/', array('message' => 'Huone on poistettu onnistuneesti!'));
     }
-    
-    public static function liity($id){
+
+    public static function liity($id) {
         self::check_logged_in();
         $kayttaja = self::get_user_logged_in();
         $huone = Huone::find($id);
-        $kayttaja->liity_huoneeseen($huone, $kayttaja);
+        $kayttaja->liityHuoneeseen($huone, $kayttaja);
         Redirect::to('/huone/' . $huone->id, array('huone' => $huone, 'message' => 'Huoneeseen liitytty!'));
     }
-    
-    public static function poistu($id){
+
+    public static function poistu($id) {
         self::check_logged_in();
         $kayttaja = self::get_user_logged_in();
         $huone = Huone::find($id);
-        $kayttaja->poistu_huoneesta($huone, $kayttaja);
+        $kayttaja->poistuHuoneesta($huone, $kayttaja);
         Redirect::to('/huone/' . $huone->id, array('huone' => $huone, 'message' => 'Huoneesta poistuttu!'));
     }
+
 }

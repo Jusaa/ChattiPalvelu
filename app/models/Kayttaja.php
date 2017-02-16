@@ -11,7 +11,7 @@ class Kayttaja extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_nimi', 'validate_password', 'validate_email');
+        $this->validators = array('validateNimi', 'validatePassword', 'validateEmail');
     }
 
     public static function all() {
@@ -99,7 +99,7 @@ class Kayttaja extends BaseModel {
         return null;
     }
 
-    public static function onko_huoneessa($huone, $kayttaja) {
+    public static function onkoHuoneessa($huone, $kayttaja) {
         $query = DB::connection()->prepare('SELECT * FROM HuoneKayttaja WHERE kayttaja_id=:kid AND huone_id=:hid LIMIT 1');
         $query->execute(array('kid' => $kayttaja->id, 'hid' => $huone->id));
         $row = $query->fetch();
@@ -109,12 +109,12 @@ class Kayttaja extends BaseModel {
         return false;
     }
 
-    public static function liity_huoneeseen($huone, $kayttaja) {
+    public static function liityHuoneeseen($huone, $kayttaja) {
         $query = DB::connection()->prepare('INSERT INTO HuoneKayttaja (kayttaja_id, huone_id) VALUES (:kid, :hid)');
         $query->execute(array('kid' => $kayttaja->id, 'hid' => $huone->id));
     }
 
-    public static function poistu_huoneesta($huone, $kayttaja) {
+    public static function poistuHuoneesta($huone, $kayttaja) {
         $query = DB::connection()->prepare('DELETE FROM HuoneKayttaja WHERE huone_id=:hid AND kayttaja_id=:kid');
         $query->execute(array('kid' => $kayttaja->id, 'hid' => $huone->id));
     }
@@ -124,7 +124,7 @@ class Kayttaja extends BaseModel {
         $query->execute(array('kid' => $kayttaja->id));
         $rows = $query->fetchAll();
         $huoneet = array();
-        
+
         foreach ($rows as $row) {
             $huoneet[] = Huone::find($row['huone_id']);
         }
@@ -132,7 +132,7 @@ class Kayttaja extends BaseModel {
         return $huoneet;
     }
 
-    public function validate_nimi() {
+    public function validateNimi() {
         $errors = array();
         if ($this->nimi == '' || $this->nimi == null) {
             $errors[] = 'Nimi ei saa olla tyhjä! Minimissään neljä merkkiä!';
@@ -143,7 +143,7 @@ class Kayttaja extends BaseModel {
         return $errors;
     }
 
-    public function validate_password() {
+    public function validatePassword() {
         $errors = array();
         if ($this->password == '' || $this->password == null) {
             $errors[] = 'Salasana ei saa olla tyhjä! Minimissään neljä merkkiä!';
@@ -154,7 +154,7 @@ class Kayttaja extends BaseModel {
         return $errors;
     }
 
-    public function validate_email() {
+    public function validateEmail() {
         $errors = array();
         if ($this->email == '' || $this->email == null) {
             $errors[] = 'Sähköposti ei saa olla tyhjä!';
