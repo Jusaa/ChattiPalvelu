@@ -23,10 +23,28 @@
     </div>    
 
 </div>
-<p>
-    <span>Huoneen käyttäjälista</span>  
-    {% for kayttaja in kayttajat %}
-        <a class="btn" href="{{base_path}}/user/{{kayttaja.id}}">{{kayttaja.nimi}}</a>
-    {% endfor %}
-</p>
+<div class="row text-right">
+    <span>Huoneen käyttäjälista</span> 
+</div>
+{% for kayttaja in kayttajat %}
+<div class="row text-right">
+    <a href="{{base_path}}/user/{{kayttaja.id}}">{{kayttaja.nimi}}</a>
+</div>
+{% endfor %}
+
+<div id="wrapper">
+    <div id="menu">
+        <p class="welcome">Welcome, <b></b></p>
+        <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
+        <div style="clear:both"></div>
+    </div>
+     
+    <div id="chatbox"></div>
+     
+    <form name="message" action="">
+        <input name="usermsg" type="text" id="usermsg" size="63" />
+        <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
+    </form>
+</div>
+
 {% endblock %}

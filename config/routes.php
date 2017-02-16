@@ -64,19 +64,19 @@
   }); 
   
   $routes->get('/user/:id', function($id) {
-    KayttajaController::user($id);
+    KayttajaController::profiili($id);
   });
   
   $routes->get('/user/:id/muokkaa', function($id) {
-    KayttajaController::kayttajaMuokkaa($id);
+    KayttajaController::muokkaa($id);
   });
   
   $routes->post('/user/:id/muokkaa', function($id) {
-    KayttajaController::user_update($id);
+    KayttajaController::muokkaaPost($id);
   });
   
   $routes->post('/user/:id/poista', function($id) {
-    KayttajaController::user_delete($id);
+    KayttajaController::poista($id);
   });
   
   $routes->get('/huone/liity/:id', function($id) {

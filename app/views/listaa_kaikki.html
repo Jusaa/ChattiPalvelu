@@ -18,8 +18,8 @@
         <tr>
           <td><a href="{{base_path}}/huone/{{huone.id}}">{{huone.nimi}}</td>
           <td>{{huone.kuvaus}}</td>
-          <td><a class="btn btn-default btn-sm" href="{{base_path}}/huone/{{huone.id}}/muokkaa">Muokkaa</a></td>
-          <td>{{napit.poista_button("#{base_path}/huone/#{huone.id}/poista", 'POISTA HUONE')}}</td>
+          <td>{{napit.muokkaa_button("#{base_path}/huone/#{huone.id}/muokkaa")}}</td>
+          <td>{{napit.poista_button("#{base_path}/huone/#{huone.id}/poista")}}</td>
         </tr>
       {% endfor %}
     </tbody>
@@ -46,7 +46,7 @@
           <td><a href="{{base_path}}/user/{{kayttaja.id}}">{{kayttaja.nimi}}</td>
           <td>{{kayttaja.email}}</td>
           <td>{{kayttaja.taso}}</td>
-          <td><a class="btn btn-default btn-sm" href="{{base_path}}/user/{{kayttaja.id}}/muokkaa">Muokkaa</a></td>
+          <td>{{napit.muokkaa_button("#{base_path}/user/#{kayttaja.id}/muokkaa")}}</td>
           <td>{{napit.poista_button("#{base_path}/user/#{kayttaja.id}/poista")}}</td>
         </tr>
       {% endfor %}

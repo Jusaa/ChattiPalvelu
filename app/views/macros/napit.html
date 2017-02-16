@@ -3,3 +3,9 @@
     <button type="submit" class="btn btn-danger">{{text|default('Poista')}}</button>
   </form>
 {% endmacro %}
+
+{% macro muokkaa_button(path, text) %}
+  <form method="get" action="{{path}}" style="display: inline-block;">
+    <button type="submit" class="btn">{{text|default('Muokkaa')}}</button>
+  </form>
+{% endmacro %}

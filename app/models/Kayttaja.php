@@ -53,7 +53,7 @@ class Kayttaja extends BaseModel {
 
         return null;
     }
-    
+
     public static function findNimella($nimi) {
         $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE nimi = :nimi LIMIT 1');
         $query->execute(array('nimi' => $nimi));
@@ -97,27 +97,39 @@ class Kayttaja extends BaseModel {
             return self::findNimella($nimi);
         }
         return null;
-        
     }
-    
-    public static function onko_huoneessa($huone, $kayttaja){
+
+    public static function onko_huoneessa($huone, $kayttaja) {
         $query = DB::connection()->prepare('SELECT * FROM HuoneKayttaja WHERE kayttaja_id=:kid AND huone_id=:hid LIMIT 1');
         $query->execute(array('kid' => $kayttaja->id, 'hid' => $huone->id));
         $row = $query->fetch();
-        if($row){
+        if ($row) {
             return true;
         }
         return false;
     }
-    
+
     public static function liity_huoneeseen($huone, $kayttaja) {
         $query = DB::connection()->prepare('INSERT INTO HuoneKayttaja (kayttaja_id, huone_id) VALUES (:kid, :hid)');
         $query->execute(array('kid' => $kayttaja->id, 'hid' => $huone->id));
     }
-    
+
     public static function poistu_huoneesta($huone, $kayttaja) {
         $query = DB::connection()->prepare('DELETE FROM HuoneKayttaja WHERE huone_id=:hid AND kayttaja_id=:kid');
         $query->execute(array('kid' => $kayttaja->id, 'hid' => $huone->id));
+    }
+
+    public static function huoneet($kayttaja) {
+        $query = DB::connection()->prepare('SELECT huone_id FROM HuoneKayttaja WHERE kayttaja_id=:kid');
+        $query->execute(array('kid' => $kayttaja->id));
+        $rows = $query->fetchAll();
+        $huoneet = array();
+        
+        foreach ($rows as $row) {
+            $huoneet[] = Huone::find($row['huone_id']);
+        }
+
+        return $huoneet;
     }
 
     public function validate_nimi() {
@@ -152,4 +164,5 @@ class Kayttaja extends BaseModel {
 
         return $errors;
     }
+
 }

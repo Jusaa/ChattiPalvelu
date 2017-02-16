@@ -21,10 +21,12 @@ class HuoneController extends BaseController{
     }
     
     public static function lisaa() {
+        self::check_logged_in();
         View::make('lisaa_huone.html');
     }
 
     public static function lisaaPost() {
+        self::check_logged_in();
         $params = $_POST;
         $attributes = array(
             'nimi' => $params['nimi'],
@@ -73,6 +75,7 @@ class HuoneController extends BaseController{
     }
     
     public static function liity($id){
+        self::check_logged_in();
         $kayttaja = self::get_user_logged_in();
         $huone = Huone::find($id);
         $kayttaja->liity_huoneeseen($huone, $kayttaja);
@@ -80,6 +83,7 @@ class HuoneController extends BaseController{
     }
     
     public static function poistu($id){
+        self::check_logged_in();
         $kayttaja = self::get_user_logged_in();
         $huone = Huone::find($id);
         $kayttaja->poistu_huoneesta($huone, $kayttaja);

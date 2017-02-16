@@ -17,7 +17,7 @@ class Huone extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_nimi', 'validate_kuvaus');
+        $this->validators = array('validate_nimi');
     }
 
     public static function all() {
@@ -78,32 +78,23 @@ class Huone extends BaseModel {
     }
     
     public static function kayttajat($id){
-        $query = DB::connection()->prepare('SELECT * FROM HuoneKayttaja WHERE huone_id=:hid');
+        $query = DB::connection()->prepare('SELECT kayttaja_id FROM HuoneKayttaja WHERE huone_id=:hid');
         $query->execute(array('hid' => $id));
         $rows = $query->fetchAll();
         $kayttajat = array();
 
         foreach ($rows as $row) {
-            array_push($kayttajat, Kayttaja::find($row['id']));
+            array_push($kayttajat, Kayttaja::find($row['kayttaja_id']));
         }
         return $kayttajat;
     }
-
+    
     public function validate_nimi() {
         $errors = array();
         if ($this->nimi == '' || $this->nimi == null) {
             $errors[] = 'Nimi ei saa olla tyhjä! Minimissään neljä merkkiä!';
         } elseif (strlen($this->nimi) < 4) {
             $errors[] = 'Nimen pituuden tulee olla vähintään neljä merkkiä!';
-        }
-
-        return $errors;
-    }
-
-    public function validate_kuvaus() {
-        $errors = array();
-        if (strlen($this->kuvaus) > 255) {
-            $errors[] = 'Kuvaus saa olla maksimissaan 255 merkkiä pitkä, kuvauksesi oli ' + strlen($this->kuvaus) + ' merkkiä pitkä';
         }
 
         return $errors;

@@ -5,23 +5,14 @@
         <group name="TsohaWindowsilla">
             <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/config/routes.php</file>
             <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/models/Viesti.php</file>
-            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/huoneet.html</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/listaa_kaikki.html</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/huone.html</file>
             <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/sql/create_tables.sql</file>
+            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/models/Kayttaja.php</file>
             <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/models/Huone.php</file>
-            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/base.html</file>
             <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/login.html</file>
             <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/controllers/HuoneController.php</file>
-            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/profile.html</file>
-            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/controllers/MainController.php</file>
-            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/list_all.html</file>
-            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/config_room.html</file>
-            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/models/Kayttaja.php</file>
-            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/lisaa_huone.html</file>
-            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/config_user.html</file>
             <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/controllers/KayttajaController.php</file>
-            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/views/register.html</file>
-            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/lib/base_controller.php</file>
-            <file>file:/C:/Users/Jusaa/Documents/ChattiPalvelu/app/controllers/ViestiController.php</file>
         </group>
     </open-files>
 </project-private>

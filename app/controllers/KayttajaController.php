@@ -21,6 +21,7 @@ class KayttajaController extends BaseController {
     }
     
     public static function logout() {
+        self::check_logged_in();
         $_SESSION['kayttaja'] = null;
         Redirect::to('/login', array('message' => 'Uloskirjautuminen onnistui'));
     }
@@ -46,19 +47,20 @@ class KayttajaController extends BaseController {
         View::make('register.html', array('errors' => $errors, 'attributes' => $attributes));
     }
 
-    public static function user($id) {
+    public static function profiili($id) {
         self::check_logged_in();
         $kayttaja = Kayttaja::find($id);
-        View::make('profiili.html', array('kayttaja' => $kayttaja));
+        $huoneet = Kayttaja::huoneet($kayttaja);        
+        View::make('profiili.html', array('kayttaja' => $kayttaja, 'huoneet' => $huoneet));
     }
 
-    public static function kayttajaMuokkaa($id) {
+    public static function muokkaa($id) {
         self::check_logged_in();
         $kayttaja = Kayttaja::find($id);
         View::make('muokkaa_kayttaja.html', array('kayttaja' => $kayttaja));
     }
 
-    public static function user_update($id) {
+    public static function muokkaaPost($id) {
         self::check_logged_in();
         $params = $_POST;
         $attributes = array(
@@ -81,7 +83,7 @@ class KayttajaController extends BaseController {
         }
     }
 
-    public static function user_delete($id) {
+    public static function poista($id) {
         self::check_logged_in();
         Kayttaja::delete($id);
         Redirect::to('/', array('message' => 'Käyttäjä on poistettu onnistuneesti!'));
