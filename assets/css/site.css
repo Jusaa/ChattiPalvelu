@@ -8,3 +8,24 @@
   max-width: 1200px;
   margin: 0px auto;
 }
+
+#chatbox {
+    text-align:left;
+    margin:0 auto;
+    margin-bottom:25px;
+    padding:10px;
+    background:#fff;
+    height:610px;
+    max-width: 1200px;
+    border:1px solid #ACD8F0;
+    overflow:hidden; }
+  
+#usermsg {
+    max-width: 1200px;
+    border:1px solid #ACD8F0; }
+  
+#submit { width: 60px; }
+
+#menu { padding:12.5px 25px 12.5px 25px; }
+  
+.msgln { margin:0 0 2px 0; }

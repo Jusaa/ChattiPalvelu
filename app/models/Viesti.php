@@ -40,6 +40,29 @@ class Viesti extends BaseModel {
         return $viestit;
     }
 
+    public static function allFromRoom($id) {
+
+        $query = DB::connection()->prepare('SELECT * FROM Viesti WHERE huone_id = :id');
+        $query->execute(array('id' => $id));
+        $rows = $query->fetchAll();
+        $viestit = array();
+        $rows = array_reverse($rows);
+        foreach ($rows as $row) {
+            if(count($viestit) >= 20){
+                break;
+            }
+            $viestit[] = new Viesti(array(
+                'id' => $row['id'],
+                'kayttaja_id' => $row['kayttaja_id'],
+                'huone_id' => $row['huone_id'],
+                'sisalto' => $row['sisalto'],
+                'lahetysaika' => $row['lahetysaika']
+            ));
+        }
+        $viestit = array_reverse($viestit);
+        return $viestit;
+    }
+
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Viesti WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));

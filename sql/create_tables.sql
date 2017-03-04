@@ -23,6 +23,6 @@ CREATE TABLE Viesti(
   id SERIAL PRIMARY KEY,
   kayttaja_id INTEGER REFERENCES Kayttaja(id),
   huone_id INTEGER REFERENCES Huone(id),
-  sisalto varchar(500) NOT NULL,
+  sisalto varchar(100) NOT NULL,
   lahetysaika timestamp DEFAULT CURRENT_TIMESTAMP
 );

@@ -20,6 +20,7 @@ class MainController extends BaseController {
     
     public static function listall() {
         self::check_logged_in();
+        self::check_taso(4);
         $huoneet = Huone::all();
         $kayttajat = Kayttaja::all();
         $viestit = Viesti::all();

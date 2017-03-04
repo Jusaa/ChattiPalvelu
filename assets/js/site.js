@@ -1,8 +1,10 @@
-$(document).ready(function () {
-    $("#submitmsg").click(function () {
-        var clientmsg = $("#usermsg").val();
-        $.post("post.php", {text: clientmsg});
-        $("#usermsg").attr("value", "");
-        return false;
-    });
-});
+//$(document).ready(function () {
+    $("#submitmsg").click(function(){	
+		var clientmsg = $("#usermsg").val();
+                var room = $("#room").val();
+                var user = $("#user").val();
+		$.post("ViestiController.php", {text: clientmsg, room: room, user: user});				
+		$("#usermsg").attr("value", "");
+		return false;
+	});
+//});

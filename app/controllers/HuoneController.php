@@ -7,10 +7,11 @@ class HuoneController extends BaseController {
         $huone = Huone::find($id);
         $kayttaja = self::get_user_logged_in();
         $huonekayttajat = Huone::kayttajat($id);
+        $viestit = Viesti::allFromRoom($id);
         if ($kayttaja->onkoHuoneessa($huone, $kayttaja)) {
-            View::make('huone.html', array('huone' => $huone, 'liittynyt' => $kayttaja, 'kayttajat' => $huonekayttajat));
+            View::make('huone.html', array('huone' => $huone, 'liittynyt' => $kayttaja, 'kayttajat' => $huonekayttajat, 'viestit' => $viestit));
         }
-        View::make('huone.html', array('huone' => $huone, 'kayttajat' => $huonekayttajat));
+        View::make('huone.html', array('huone' => $huone, 'kayttajat' => $huonekayttajat, 'viestit' => $viestit));
     }
 
     public static function huoneet() {
@@ -22,11 +23,13 @@ class HuoneController extends BaseController {
 
     public static function lisaa() {
         self::check_logged_in();
+        self::check_taso(2);
         View::make('lisaa_huone.html');
     }
 
     public static function lisaaPost() {
         self::check_logged_in();
+        self::check_taso(2);
         $params = $_POST;
         $attributes = array(
             'nimi' => $params['nimi'],
@@ -44,12 +47,14 @@ class HuoneController extends BaseController {
 
     public static function huoneMuokkaa($id) {
         self::check_logged_in();
+        self::check_taso(2);
         $huone = Huone::find($id);
         View::make('muokkaa_huone.html', array('huone' => $huone));
     }
 
     public static function paivita($id) {
         self::check_logged_in();
+        self::check_taso(2);
         $params = $_POST;
         $attributes = array(
             'id' => $id,
@@ -70,6 +75,7 @@ class HuoneController extends BaseController {
 
     public static function poista($id) {
         self::check_logged_in();
+        self::check_taso(3);
         Huone::delete($id);
         Redirect::to('/', array('message' => 'Huone on poistettu onnistuneesti!'));
     }

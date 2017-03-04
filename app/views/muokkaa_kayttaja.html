@@ -26,15 +26,22 @@
         <label>Salasana</label>
         <input type="password" name="password" class="form-control" value="{{kayttaja.password}}">
     </div>
+    {% if taso4 %}
     <div class="form-group">
         <label>Taso</label>
         <input type="text" name="taso" class="form-control" value="{{kayttaja.taso}}">
     </div>
+    {% else %}
+    <div class="form-group">
+        <input type="hidden" name="taso" class="form-control" value="{{kayttaja.taso}}">
+    </div>
+    {% endif %}
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Tallenna</button>
     </div>
 </form>
 
-{{napit.poista_button("#{base_path}/user/#{kayttaja.id}/poista", 'POISTA KÄYTTÄJÄ')}}
-
+{% if taso4 %}
+    {{napit.poista_button("#{base_path}/user/#{kayttaja.id}/poista", 'POISTA KÄYTTÄJÄ')}}
+{% endif %}
 {% endblock %}

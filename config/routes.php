@@ -87,6 +87,12 @@
       HuoneController::poistu($id); 
   });
   
+//VIESTICONTROLLER -------------------------------------------------------------
+  
+  $routes->post('/viesti/:id', function($id) {
+    ViestiController::lisaa($id);
+  });
+  
 //ESIMERKIT --------------------------------------------------------------------
 
   $routes->get('/hiekkalaatikko', function() {

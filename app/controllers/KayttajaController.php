@@ -49,19 +49,36 @@ class KayttajaController extends BaseController {
 
     public static function profiili($id) {
         self::check_logged_in();
+        $user_logged_in = self::get_user_logged_in();
         $kayttaja = Kayttaja::find($id);
-        $huoneet = Kayttaja::huoneet($kayttaja);        
+        $huoneet = Kayttaja::huoneet($kayttaja);  
+        if($user_logged_in->id == $kayttaja->id){
+            View::make('profiili.html', array('kayttaja' => $kayttaja, 'huoneet' => $huoneet, 'oma' => $user_logged_in));
+        }
         View::make('profiili.html', array('kayttaja' => $kayttaja, 'huoneet' => $huoneet));
     }
 
     public static function muokkaa($id) {
         self::check_logged_in();
+        $user_logged_in = self::get_user_logged_in();
+        $taso = self::get_user_logged_in()->taso;
         $kayttaja = Kayttaja::find($id);
-        View::make('muokkaa_kayttaja.html', array('kayttaja' => $kayttaja));
+        if($taso == 4){
+            View::make('muokkaa_kayttaja.html', array('kayttaja' => $kayttaja, 'taso4' => $taso));
+        }else if($user_logged_in->id == $kayttaja->id){
+            View::make('muokkaa_kayttaja.html', array('kayttaja' => $kayttaja));
+        }
+        self::check_taso(4);
     }
 
     public static function muokkaaPost($id) {
         self::check_logged_in();
+        $user_logged_in = self::get_user_logged_in();
+        $taso = self::get_user_logged_in()->taso;
+        $kayttaja = Kayttaja::find($id);
+        if($taso < 4 && $user_logged_in->id != $kayttaja->id){
+            View::make('muokkaa_kayttaja.html', array('kayttaja' => $kayttaja));
+        }        
         $params = $_POST;
         $attributes = array(
             'id' => $id,

@@ -11,7 +11,7 @@ class Kayttaja extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validateNimi', 'validatePassword', 'validateEmail');
+        $this->validators = array('validateNimi', 'validatePassword', 'validateEmail', 'validateTaso');
     }
 
     public static function all() {
@@ -164,5 +164,15 @@ class Kayttaja extends BaseModel {
 
         return $errors;
     }
+   
+    public function validateTaso() {
+        $errors = array();
+        if ($this->taso == '' || $this->taso == null) {
+            $errors[] = 'Taso ei voi olla tyhjä!';
+        } elseif ($this->taso < 1 || $this->taso > 4) {
+            $errors[] = 'Tason täytyy olla välillä 1-4';
+        }
 
+        return $errors;
+    }
 }

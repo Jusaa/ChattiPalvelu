@@ -4,10 +4,11 @@
 {% block content %}
 <div class="page-header">
     <h1>Henkilön {{kayttaja.nimi}} Profiili</h1>
+    {% if oma %}
     <div class="text-right">
         <a>{{napit.muokkaa_button("#{base_path}/user/#{kayttaja.id}/muokkaa")}}</a>
     </div>
-          <td></td>
+    {% endif %}
 </div>
 
 <h2>Liitytyt huoneet:</h2>
@@ -16,7 +17,9 @@
         <tr>
             <th>Nimi</th>
             <th>Kuvaus</th>
+            {% if oma %}
             <th></th>
+            {% endif %}
         </tr>
     </thead>
 
@@ -25,7 +28,9 @@
         <tr>
             <td><a href="{{base_path}}/huone/{{huone.id}}">{{huone.nimi}}</td>
             <td>{{huone.kuvaus}}</td>
+            {% if oma %}
             <td>{{napit.poista_button("#{base_path}/huone/#{huone.id}/poista", 'Poistu huoneesta')}}</td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>

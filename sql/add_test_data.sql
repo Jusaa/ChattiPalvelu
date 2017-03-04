@@ -1,6 +1,7 @@
 -- Lisää INSERT INTO lauseet tähän tiedostoon
 INSERT INTO Kayttaja (nimi, password, email) VALUES ('Jussi', 'Jussinsalasana', 'jussi@helsinki.fi');
 INSERT INTO Kayttaja (nimi, password, email) VALUES ('Pekka', 'Pekansalasana', 'pekka@helsinki.fi');
+INSERT INTO Kayttaja (nimi, password, email) VALUES ('testi', 'testi', 'testi@testi.fi');
 
 INSERT INTO Huone (nimi, kuvaus) VALUES ('Pelit', 'Keskustelua peleistä');
 INSERT INTO Huone (nimi, kuvaus) VALUES ('Yliopisto', 'Yliopiston huone');

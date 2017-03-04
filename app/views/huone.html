@@ -32,19 +32,24 @@
 </div>
 {% endfor %}
 
-<div id="wrapper">
-    <div id="menu">
-        <p class="welcome">Welcome, <b></b></p>
-        <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
-        <div style="clear:both"></div>
+<div id="wrapper">  
+
+    <div id="chatbox">
+        {% for viesti in viestit %}
+        <ul>
+            <li>{{viesti.kayttaja_id}}: {{viesti.sisalto}}</li>
+        </ul>
+        {% endfor %}
     </div>
-     
-    <div id="chatbox"></div>
-     
-    <form name="message" action="">
-        <input name="usermsg" type="text" id="usermsg" size="63" />
-        <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
+
+    {% if liittynyt %}
+    <form method="post" action="{{base_path}}/viesti/{{huone.id}}">
+        <div class="form-group">
+            <input name="usermsg" type="text" id="usermsg" size="100" />
+        </div>
+        <button type="submit" class="btn btn-primary">Lähetä</button>
     </form>
+    {% endif %}
 </div>
 
 {% endblock %}
