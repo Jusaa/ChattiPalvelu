@@ -36,11 +36,11 @@
 </div>
 {% for kayttaja in kayttajat %}
 <div class="row text-right">
-    <a href="{{base_path}}/user/{{kayttaja.id}}">{{kayttaja.nimi}}</a>
+    <a href="{{base_path}}/user/{{kayttaja.id}}">{{kayttaja.id}} : {{kayttaja.nimi}}</a>
 </div>
 {% endfor %}
 
-<div id="wrapper">  
+<div id="wrapper">
 
     <div id="chatbox">
         {% for viesti in viestit %}

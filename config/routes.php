@@ -93,6 +93,10 @@
     ViestiController::lisaa($id);
   });
   
+  $routes->get('/viesti/:id/poista', function($id) {
+      ViestiController::poista($id);
+  });
+  
 //ESIMERKIT --------------------------------------------------------------------
 
   $routes->get('/hiekkalaatikko', function() {

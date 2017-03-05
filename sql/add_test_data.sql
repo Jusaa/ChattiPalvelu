@@ -1,6 +1,6 @@
 INSERT INTO Kayttaja (nimi, password, email) VALUES ('Jussi', 'Jussinsalasana', 'jussi@helsinki.fi');
 INSERT INTO Kayttaja (nimi, password, email) VALUES ('Pekka', 'Pekansalasana', 'pekka@helsinki.fi');
-INSERT INTO Kayttaja (nimi, password, email) VALUES ('testi', 'testi', 'testi@testi.fi');
+INSERT INTO Kayttaja (nimi, password, email) VALUES ('user', 'user', 'user@helsinki.fi');
 INSERT INTO Kayttaja (nimi, password, email, taso) VALUES ('admin4', 'admin4', 'admin4@helsinki.fi', 4);
 INSERT INTO Kayttaja (nimi, password, email, taso) VALUES ('admin3', 'admin3', 'admin3@helsinki.fi', 3);
 INSERT INTO Kayttaja (nimi, password, email, taso) VALUES ('admin2', 'admin2', 'admin2@helsinki.fi', 2);
