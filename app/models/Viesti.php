@@ -102,6 +102,8 @@ class Viesti extends BaseModel {
         $errors = array();
         if ($this->sisalto == '' || $this->sisalto == null) {
             $errors[] = 'Viesti ei saa olla tyhjä!';
+        }else if(strlen($this->sisalto) > 100){
+            $errors[] = 'Viesti saa olla maksimissaan 100 merkkiä pitkä, viestisi oli ' . strlen($this->sisalto) . ' merkkiä.';
         }
         return $errors;
     }

@@ -17,7 +17,7 @@ class Huone extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validateNimi');
+        $this->validators = array('validateNimi', 'validateKuvaus');
     }
 
     public static function all() {
@@ -95,6 +95,17 @@ class Huone extends BaseModel {
             $errors[] = 'Nimi ei saa olla tyhjä! Minimissään neljä merkkiä!';
         } elseif (strlen($this->nimi) < 4) {
             $errors[] = 'Nimen pituuden tulee olla vähintään neljä merkkiä!';
+        } elseif (strlen($this->nimi) > 50) {
+            $errors[] = 'Nimen pituus saa olla maksimissaan 50 merkkiä!';
+        }
+
+        return $errors;
+    }
+    
+    public function validateKuvaus() {
+        $errors = array();
+        if (strlen($this->kuvaus) > 255) {
+            $errors[] = 'Kuvaus saa olla maksimissaan 255 merkkiä pitkä!';
         }
 
         return $errors;

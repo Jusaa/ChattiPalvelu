@@ -12,7 +12,7 @@ class KayttajaController extends BaseController {
         $kayttaja = Kayttaja::authenticate($params['nimi'], $params['password']);
         
         if(!$kayttaja){
-            View::make('login.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'nimi' => $params['nimi']));
+            View::make('login.html', array('message' => 'Väärä käyttäjätunnus tai salasana!', 'nimi' => $params['nimi']));
         }else{
             $_SESSION['kayttaja'] = $kayttaja->id;
 
@@ -35,8 +35,14 @@ class KayttajaController extends BaseController {
         $attributes = array(
             'nimi' => $params['nimi'],
             'password' => $params['password'],
-            'email' => $params['email']
+            'email' => $params['email'],
+            'taso' => $params['taso']
         );
+        if(Kayttaja::findNimella($params['nimi']) != null){
+            $errors = array();
+            array_push($errors, "Käyttäjänimi on jo käytössä, valitse toinen");
+            View::make('register.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
         $kayttaja = new Kayttaja($attributes);
         $errors = $kayttaja->errors();
         if (count($errors) == 0) {
@@ -51,9 +57,14 @@ class KayttajaController extends BaseController {
         self::check_logged_in();
         $user_logged_in = self::get_user_logged_in();
         $kayttaja = Kayttaja::find($id);
+        if($kayttaja == null){
+            Redirect::to('/', array('message' => 'Profiilia id:llä ' . $id . ' ei ole olemassa!'));
+        }
         $huoneet = Kayttaja::huoneet($kayttaja);  
         if($user_logged_in->id == $kayttaja->id){
             View::make('profiili.html', array('kayttaja' => $kayttaja, 'huoneet' => $huoneet, 'oma' => $user_logged_in));
+        }else if($user_logged_in->taso == 4){
+            View::make('profiili.html', array('kayttaja' => $kayttaja, 'huoneet' => $huoneet));
         }
         View::make('profiili.html', array('kayttaja' => $kayttaja, 'huoneet' => $huoneet));
     }
@@ -63,11 +74,14 @@ class KayttajaController extends BaseController {
         $user_logged_in = self::get_user_logged_in();
         $taso = self::get_user_logged_in()->taso;
         $kayttaja = Kayttaja::find($id);
+        if($kayttaja == null){
+            Redirect::to('/', array('message' => 'Käyttäjää id:llä' . $id . 'ei ole olemassa!'));
+        }
         if($taso == 4){
-            View::make('muokkaa_kayttaja.html', array('kayttaja' => $kayttaja, 'taso4' => $taso));
+            View::make('muokkaa_kayttaja.html', array('kayttaja' => $kayttaja));
         }else if($user_logged_in->id == $kayttaja->id){
             View::make('muokkaa_kayttaja.html', array('kayttaja' => $kayttaja));
-        }
+        }        
         self::check_taso(4);
     }
 
@@ -78,7 +92,7 @@ class KayttajaController extends BaseController {
         $kayttaja = Kayttaja::find($id);
         if($taso < 4 && $user_logged_in->id != $kayttaja->id){
             View::make('muokkaa_kayttaja.html', array('kayttaja' => $kayttaja));
-        }        
+        }
         $params = $_POST;
         $attributes = array(
             'id' => $id,
@@ -94,7 +108,6 @@ class KayttajaController extends BaseController {
         if (count($errors) > 0) {
             View::make('muokkaa_kayttaja.html', array('errors' => $errors, 'kayttaja' => $kayttaja));
         } else {
-            // Kutsutaan alustetun olion update-metodia, joka päivittää pelin tiedot tietokannassa
             $kayttaja->update($kayttaja);
             Redirect::to('/', array('message' => 'Tietoja on muokattu onnistuneesti!'));
         }
@@ -102,6 +115,7 @@ class KayttajaController extends BaseController {
 
     public static function poista($id) {
         self::check_logged_in();
+        self::check_taso(4);
         Kayttaja::delete($id);
         Redirect::to('/', array('message' => 'Käyttäjä on poistettu onnistuneesti!'));
     }

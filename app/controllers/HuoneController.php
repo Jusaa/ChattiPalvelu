@@ -8,10 +8,13 @@ class HuoneController extends BaseController {
         $kayttaja = self::get_user_logged_in();
         $huonekayttajat = Huone::kayttajat($id);
         $viestit = Viesti::allFromRoom($id);
-        if ($kayttaja->onkoHuoneessa($huone, $kayttaja)) {
-            View::make('huone.html', array('huone' => $huone, 'liittynyt' => $kayttaja, 'kayttajat' => $huonekayttajat, 'viestit' => $viestit));
+        if ($huone == null) {
+            Redirect::to('/', array('message' => 'Huonetta id:llä ' . $id . ' ei ole olemassa!'));
         }
-        View::make('huone.html', array('huone' => $huone, 'kayttajat' => $huonekayttajat, 'viestit' => $viestit));
+        if ($kayttaja->onkoHuoneessa($huone, $kayttaja)) {
+            View::make('huone.html', array('huone' => $huone, 'liittynyt' => $kayttaja, 'kayttajat' => $huonekayttajat, 'viestit' => $viestit, 'kayttaja' => $kayttaja));
+        }
+        View::make('huone.html', array('huone' => $huone, 'kayttajat' => $huonekayttajat, 'viestit' => $viestit, 'kayttaja' => $kayttaja));
     }
 
     public static function huoneet() {
@@ -49,6 +52,9 @@ class HuoneController extends BaseController {
         self::check_logged_in();
         self::check_taso(2);
         $huone = Huone::find($id);
+        if ($huone == null) {
+            Redirect::to('/', array('message' => 'Huonetta id:llä ' . $id . ' ei ole olemassa!'));
+        }
         View::make('muokkaa_huone.html', array('huone' => $huone));
     }
 
@@ -76,24 +82,40 @@ class HuoneController extends BaseController {
     public static function poista($id) {
         self::check_logged_in();
         self::check_taso(3);
+        $huone = Huone::find($id);
+        if ($huone == null) {
+            Redirect::to('/', array('message' => 'Huonetta id:llä ' . $id . ' ei ole olemassa!'));
+        }
         Huone::delete($id);
         Redirect::to('/', array('message' => 'Huone on poistettu onnistuneesti!'));
     }
 
-    public static function liity($id) {
+    public static function liity($hid, $kid) {
         self::check_logged_in();
-        $kayttaja = self::get_user_logged_in();
-        $huone = Huone::find($id);
-        $kayttaja->liityHuoneeseen($huone, $kayttaja);
-        Redirect::to('/huone/' . $huone->id, array('huone' => $huone, 'message' => 'Huoneeseen liitytty!'));
+        $kayttaja = Kayttaja::find($kid);
+        $huone = Huone::find($hid);
+        if (Kayttaja::onkoHuoneessa($huone, $kayttaja)) {
+            Redirect::to('/huone/' . $huone->id, array('huone' => $huone));
+        }
+        if (self::get_user_logged_in() == $kayttaja || self::get_user_logged_in()->taso > $kayttaja->taso) {
+            $kayttaja->liityHuoneeseen($huone, $kayttaja);
+            Redirect::to('/huone/' . $huone->id, array('huone' => $huone, 'message' => 'Huoneeseen liitytty!'));
+        }
+        self::check_taso(4);
     }
 
-    public static function poistu($id) {
+    public static function poistu($hid, $kid) {
         self::check_logged_in();
-        $kayttaja = self::get_user_logged_in();
-        $huone = Huone::find($id);
-        $kayttaja->poistuHuoneesta($huone, $kayttaja);
-        Redirect::to('/huone/' . $huone->id, array('huone' => $huone, 'message' => 'Huoneesta poistuttu!'));
+        $kayttaja = Kayttaja::find($kid);
+        $huone = Huone::find($hid);
+        if (!Kayttaja::onkoHuoneessa($huone, $kayttaja)) {
+            Redirect::to('/huone/' . $huone->id, array('huone' => $huone));
+        }
+        if (self::get_user_logged_in() == $kayttaja || self::get_user_logged_in()->taso > $kayttaja->taso) {
+            $kayttaja->poistuHuoneesta($huone, $kayttaja);
+            Redirect::to('/huone/' . $huone->id, array('huone' => $huone, 'message' => 'Huoneesta poistuttu!'));
+        }
+        self::check_taso(4);
     }
 
 }

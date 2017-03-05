@@ -26,7 +26,7 @@
         <label>Salasana</label>
         <input type="password" name="password" class="form-control" value="{{kayttaja.password}}">
     </div>
-    {% if taso4 %}
+    {% if user_logged_in.taso == 4 %}
     <div class="form-group">
         <label>Taso</label>
         <input type="text" name="taso" class="form-control" value="{{kayttaja.taso}}">
@@ -41,7 +41,7 @@
     </div>
 </form>
 
-{% if taso4 %}
+{% if user_logged_in.taso == 4 %}
     {{napit.poista_button("#{base_path}/user/#{kayttaja.id}/poista", 'POISTA KÄYTTÄJÄ')}}
 {% endif %}
 {% endblock %}

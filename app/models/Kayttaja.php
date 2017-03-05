@@ -85,6 +85,12 @@ class Kayttaja extends BaseModel {
     }
 
     public static function delete($id) {
+        $query = DB::connection()->prepare('DELETE FROM HuoneKayttaja WHERE kayttaja_id=:id');
+        $query->execute(array('id' => $id));
+        
+        $query = DB::connection()->prepare('DELETE FROM Viesti WHERE kayttaja_id=:id');
+        $query->execute(array('id' => $id));
+        
         $query = DB::connection()->prepare('DELETE FROM Kayttaja WHERE id=:id');
         $query->execute(array('id' => $id));
     }
@@ -138,6 +144,8 @@ class Kayttaja extends BaseModel {
             $errors[] = 'Nimi ei saa olla tyhjä! Minimissään neljä merkkiä!';
         } elseif (strlen($this->nimi) < 4) {
             $errors[] = 'Nimen pituuden tulee olla vähintään neljä merkkiä!';
+        } elseif (strlen($this->nimi) > 50) {
+            $errors[] = 'Nimen pituus saa olla maksimissaan 50 merkkiä!';
         }
 
         return $errors;
@@ -149,6 +157,8 @@ class Kayttaja extends BaseModel {
             $errors[] = 'Salasana ei saa olla tyhjä! Minimissään neljä merkkiä!';
         } elseif (strlen($this->password) < 4) {
             $errors[] = 'Salasanan pituuden tulee olla vähintään neljä merkkiä!';
+        } elseif (strlen($this->password) > 255) {
+            $errors[] = 'Salasana saa olla maksimissaan 255 merkkiä pitkä!';
         }
 
         return $errors;
@@ -160,6 +170,8 @@ class Kayttaja extends BaseModel {
             $errors[] = 'Sähköposti ei saa olla tyhjä!';
         } elseif (strpos($this->email, '@') == false) {
             $errors[] = 'Sähköpostiosoite ei ole oikeassa muodossa!';
+        } elseif (strlen($this->email) > 255) {
+            $errors[] = 'Sähköpostiosoite saa olla maksimissaan 255 merkkiä pitkä!';
         }
 
         return $errors;

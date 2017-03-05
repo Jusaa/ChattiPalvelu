@@ -1,5 +1,5 @@
 {% macro poista_button(path, text) %}
-  <form method="post" action="{{path}}" style="display: inline-block;">
+  <form method="get" action="{{path}}" style="display: inline-block;">
     <button type="submit" class="btn btn-danger">{{text|default('Poista')}}</button>
   </form>
 {% endmacro %}

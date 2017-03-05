@@ -4,6 +4,7 @@
 
 <div class="page-header">
     <h1>{{huone.nimi}}</h1>
+    <h6>{{huone.kuvaus}}</h6>
 
     {% if message %}
     <div class="alert alert-success">
@@ -12,13 +13,20 @@
         </ul>
     </div>
     {% endif %}
+    {% for error in errors %}
+    <div class="alert alert-success">
+        <ul>
+            <li>{{error}}</li>
+        </ul>
+    </div>
+    {% endfor %}
 
 
     <div class="text-right">
         {% if liittynyt %}
-        <a class="btn btn-danger btn-sm" href="{{base_path}}/huone/poistu/{{huone.id}}">Poistu huoneesta</a>
+        <a class="btn btn-danger btn-sm" href="{{base_path}}/huone/{{huone.id}}/poistu/{{kayttaja.id}}">Poistu huoneesta</a>
         {% else %}
-        <a class="btn btn-success btn-sm" href="{{base_path}}/huone/liity/{{huone.id}}">Liity huoneeseen</a>
+        <a class="btn btn-success btn-sm" href="{{base_path}}/huone/{{huone.id}}/liity/{{kayttaja.id}}">Liity huoneeseen</a>
         {% endif %}
     </div>    
 

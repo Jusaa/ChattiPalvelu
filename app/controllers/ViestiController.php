@@ -14,6 +14,8 @@ class ViestiController extends BaseController{
         $errors = $viesti->errors();
         if (count($errors) == 0) {
             $viesti->save($viesti);
+        }else{
+            Redirect::to('/huone/' . $id, array('errors' => $errors));
         }
         Redirect::to('/huone/' . $id);
     }    

@@ -8,6 +8,10 @@
     <div class="text-right">
         <a>{{napit.muokkaa_button("#{base_path}/user/#{kayttaja.id}/muokkaa")}}</a>
     </div>
+    {% elseif user_logged_in.taso == 4 %}
+    <div class="text-right">
+        <a>{{napit.muokkaa_button("#{base_path}/user/#{kayttaja.id}/muokkaa")}}</a>
+    </div>
     {% endif %}
 </div>
 
@@ -19,6 +23,8 @@
             <th>Kuvaus</th>
             {% if oma %}
             <th></th>
+            {% elseif user_logged_in.taso > kayttaja.taso %}
+            <th></th>
             {% endif %}
         </tr>
     </thead>
@@ -29,7 +35,9 @@
             <td><a href="{{base_path}}/huone/{{huone.id}}">{{huone.nimi}}</td>
             <td>{{huone.kuvaus}}</td>
             {% if oma %}
-            <td>{{napit.poista_button("#{base_path}/huone/#{huone.id}/poista", 'Poistu huoneesta')}}</td>
+            <td>{{napit.poista_button("#{base_path}/huone/#{huone.id}/poistu/#{kayttaja.id}", 'Poistu huoneesta')}}</td>
+            {% elseif user_logged_in.taso > kayttaja.taso %}
+            <td>{{napit.poista_button("#{base_path}/huone/#{huone.id}/poistu/#{kayttaja.id}", 'Poista huoneesta')}}</td>
             {% endif %}
         </tr>
         {% endfor %}

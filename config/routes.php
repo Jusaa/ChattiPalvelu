@@ -37,7 +37,7 @@
     HuoneController::paivita($id);
   });
   
-  $routes->post('/huone/:id/poista', function($id) {
+  $routes->get('/huone/:id/poista', function($id) {
     HuoneController::poista($id);
   }); 
   
@@ -75,16 +75,16 @@
     KayttajaController::muokkaaPost($id);
   });
   
-  $routes->post('/user/:id/poista', function($id) {
+  $routes->get('/user/:id/poista', function($id) {
     KayttajaController::poista($id);
   });
   
-  $routes->get('/huone/liity/:id', function($id) {
-      HuoneController::liity($id); 
+  $routes->get('/huone/:hid/liity/:kid', function($hid, $kid) {
+      HuoneController::liity($hid, $kid); 
   });
   
-  $routes->get('/huone/poistu/:id', function($id) {
-      HuoneController::poistu($id); 
+  $routes->get('/huone/:hid/poistu/:kid', function($hid, $kid) {
+      HuoneController::poistu($hid, $kid); 
   });
   
 //VIESTICONTROLLER -------------------------------------------------------------
