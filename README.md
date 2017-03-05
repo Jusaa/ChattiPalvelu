@@ -17,4 +17,5 @@ Linkkejä sovelluksen eri sivuille:
 * [Login](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/login)
 * [Register](https://jussiliu.users.cs.helsinki.fi/ChattiPalvelu/register)
 
-Testikäyttäjänä voi käyttää [testi, testi] käyttäjää, mutta rekisteröityminen toimii, joten oman käyttäjän käyttäminen mahdollista
+Testikäyttäjinä voi käyttää [user, user] käyttäjää, mutta rekisteröityminen toimii, joten oman käyttäjän käyttäminen mahdollista
+Ylläpidon käyttäjiä on kolme kappaletta: [admin2, admin2], [admin3, admin3] ja [admin4, admin4]
