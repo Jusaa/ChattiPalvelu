@@ -60,13 +60,15 @@ class KayttajaController extends BaseController {
         if($kayttaja == null){
             Redirect::to('/', array('message' => 'Profiilia id:llä ' . $id . ' ei ole olemassa!'));
         }
-        $huoneet = Kayttaja::huoneet($kayttaja);  
+        $huoneet = Kayttaja::huoneet($kayttaja);
         if($user_logged_in->id == $kayttaja->id){
             View::make('profiili.html', array('kayttaja' => $kayttaja, 'huoneet' => $huoneet, 'oma' => $user_logged_in));
         }else if($user_logged_in->taso == 4){
             View::make('profiili.html', array('kayttaja' => $kayttaja, 'huoneet' => $huoneet));
+        }else if($user_logged_in->taso > 1){
+            View::make('profiili.html', array('kayttaja' => $kayttaja, 'huoneet' => $huoneet));
         }
-        View::make('profiili.html', array('kayttaja' => $kayttaja, 'huoneet' => $huoneet));
+        self::check_taso(4);
     }
 
     public static function muokkaa($id) {
